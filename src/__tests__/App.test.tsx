@@ -10,7 +10,7 @@ const mockedUseUsersQuery = useUsersQuery as jest.Mock<any>;
 // Mock the hook module
 jest.mock("../useInfiniteQuery");
 
-describe.skip("<App />", () => {
+describe("<App />", () => {
   beforeEach(() => {
     mockedUseUsersQuery.mockImplementation(() => ({ isLoading: true }));
   });
