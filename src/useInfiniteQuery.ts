@@ -1,28 +1,27 @@
 import { useInfiniteQuery } from "react-query";
+// Import axiosClient
+import axiosClient from "./axiosClient";
 import { UsersPage } from "./types";
 
 export async function getData({ pageParam = 0 }) {
-  const url = `https://dummyapi.io/data/v1/user?page=${pageParam}&limit=50`;
-  const response = await fetch(url, {
+  // Update the http client to use axiosClient instead of fetch api
+  const response = await axiosClient({
+    url: `/data/v1/user?page=${pageParam}&limit=50`,
     method: "GET",
     headers: {
       "app-id": "62f43477f19452557ba1ce76",
     },
   });
 
-  if (!response.ok) {
-    throw new Error("Problem fetching data");
-  }
+  // Destruct the following properties from response.data
+  const { data, limit, page, total } = response.data;
 
-  const dataFromServer = await response.json();
-  const data: UsersPage = {
-    results: dataFromServer.data,
-    next:
-      dataFromServer.total > dataFromServer.page * dataFromServer.limit
-        ? pageParam + 1
-        : undefined,
+  // Update the variable usaga
+  const pageResponse: UsersPage = {
+    results: data,
+    next: total > page * limit ? pageParam + 1 : undefined,
   };
-  return data;
+  return pageResponse;
 }
 
 export const useUsersQuery = () => {

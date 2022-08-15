@@ -17,7 +17,6 @@ describe("<App />", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-
   it("Renders without crashing", () => {
     render(<App />);
   });
