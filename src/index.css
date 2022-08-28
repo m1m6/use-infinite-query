@@ -8,3 +8,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.form-input {
+  margin: 10px 0;
+  padding: 5px 0;
+}
+
+.form-input label {
+  color: black;
+  font-weight: bold;
+  margin-right: 10px;
+} 
+
+.form-input input {
+  height: 25px;
+  width: 20%;
+  padding-left: 10px;
+  font-size: 18px;
+} 
+
+.submit-button {
+  width: 35%;
+  font-size: 18px;
+  font-weight: bold;
+  background-color:#ccc;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
