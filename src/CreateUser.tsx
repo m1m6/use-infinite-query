@@ -1,16 +1,30 @@
 import React, { FormEvent } from 'react';
+import { useCreateUserMutation } from './useCreateUserMutation';
 
 export default function CreateUser() {
+  const { mutate, isLoading } = useCreateUserMutation();
 
   const onSubmitHandler = async (form: FormEvent<HTMLFormElement>) => {
     form.preventDefault();
     const formTarget = (form.target as HTMLFormElement);
     const formData = new FormData(formTarget);
-    const firstName = formData.get('firstName');
-    const lastName = formData.get('lastName');
-    const email = formData.get('email');
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const email = formData.get('email') as string;
 
-    console.log(firstName, lastName, email);
+    mutate({
+      firstName,
+      lastName,
+      email
+    }, {
+      onSuccess: () => {
+        alert('User added successfully');
+      },
+      onError: (response) => {
+        alert('Failed to create user');
+        console.log(response);
+      }
+    })
   }
 
   return (
